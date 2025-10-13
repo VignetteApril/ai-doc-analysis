@@ -1,0 +1,13 @@
+<!-- app/views/documents/new.html.erb -->
+<div class="max-w-4xl mx-auto p-6 space-y-4">
+  <h1 class="text-2xl font-semibold">新建公文</h1>
+  <%= form_with model: @document, class: "space-y-3" do |f| %>
+    <%= f.label :title, "标题", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :title, class: "w-full border rounded px-3 py-2" %>
+
+    <%= f.label :content, "正文", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_area :content, rows: 12, class: "w-full border rounded px-3 py-2" %>
+
+    <%= f.submit "保存并进入校对", class: "px-4 py-2 bg-indigo-600 text-white rounded" %>
+  <% end %>
+</div>

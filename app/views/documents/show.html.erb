@@ -1,0 +1,34 @@
+<!-- app/views/documents/show.html.erb -->
+<div data-controller="proofread"
+     data-proofread-analyze-url-value="<%= analyze_document_path(@document) %>"
+     class="h-[calc(100vh-2rem)] mx-auto max-w-6xl p-4 grid grid-cols-12 gap-4">
+
+  <!-- 左侧：问题列表 -->
+  <aside class="col-span-4 bg-white rounded-xl border p-4 overflow-auto">
+    <div class="flex items-center justify-between mb-3">
+      <h2 class="text-lg font-semibold">校对建议</h2>
+      <button data-action="proofread#analyze"
+              class="px-3 py-1.5 bg-indigo-600 text-white rounded">
+        AI 分析
+      </button>
+    </div>
+
+    <div data-proofread-target="issuesPanel" class="space-y-3 text-sm">
+      <p class="text-gray-500">点击“AI 分析”获取建议。</p>
+    </div>
+  </aside>
+
+  <!-- 右侧：富文本编辑区 -->
+  <section class="col-span-8 flex flex-col">
+    <div class="flex items-center justify-between mb-2">
+      <h2 class="text-lg font-semibold">正文</h2>
+      <div class="text-xs text-gray-500">高亮为需修改处</div>
+    </div>
+
+    <div class="flex-1 bg-white rounded-xl border p-4 overflow-auto">
+       <div id="editor" data-proofread-target="editor" class="min-h-[400px]">
+         <%= @document.content.to_s %>
+       </div>
+    </div>
+  </section>
+</div>

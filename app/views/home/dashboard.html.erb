@@ -1,0 +1,5 @@
+<div class="max-w-xl mx-auto mt-10">
+  <h1 class="text-2xl font-semibold">Dashboard</h1>
+  <p class="mt-4">你好，<%= current_user&.email %></p>
+  <%= button_to "退出登录", logout_path, method: :delete, class: "mt-6 px-4 py-2 bg-gray-800 text-white rounded" %>
+</div>

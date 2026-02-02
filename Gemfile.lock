@@ -119,9 +119,6 @@ GEM
     erubi (1.13.1)
     et-orbi (1.4.0)
       tzinfo
-    ffi (1.17.3-x86_64-linux-gnu)
-    font-awesome-sass (6.4.2)
-      sassc (~> 2.0)
     foreman (0.90.0)
       thor (~> 1.4)
     fugit (1.11.2)
@@ -296,8 +293,6 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-rc4 (0.1.5)
     rubyzip (3.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     securerandom (0.4.1)
     selenium-webdriver (4.36.0)
       base64 (~> 0.2)
@@ -378,7 +373,6 @@ DEPENDENCIES
   debug
   doc_ripper (~> 0.0.9)
   docx
-  font-awesome-sass (~> 6.4.0)
   foreman
   importmap-rails
   jbuilder

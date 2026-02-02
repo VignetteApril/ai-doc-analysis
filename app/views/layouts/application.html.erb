@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>登录</title>
+    <title>AI公文校对系统</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%# 关键修改：只保留这一个。它会自动加载 application.css 及其 @import 的内容 %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <%# 将外部资源移入 head 内 %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
+    <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+
     <%= javascript_importmap_tags %>
   </head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
-  <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
 
+  <%# 这里的 class 可以保留，但注意它会作用于所有页面 %>
   <body class="min-h-screen bg-gray-50 text-gray-900">
     <%= yield %>
   </body>

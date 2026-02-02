@@ -1,26 +1,44 @@
-/*
- * This is a manifest file that'll be compiled into application.css.
- *
- * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
- * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
- * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
- * depending on specificity.
- *
- * Consider organizing styles into separate files for maintainability.
- */
-@import "@fortawesome/fontawesome-free/css/all.min.css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
+@import "./sessions.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "tailwindcss";
+
+
+
+/* 4. 自定义组件样式 */
 @layer components {
     mark[data-issue-id] {
         @apply bg-yellow-200/70 ring-2 ring-yellow-300 rounded;
     }
 }
 
+/* 5. 标准 CSS 样式 */
 .ql-editor mark {
     background: #fde68a;
     padding: 0 2px;
     border-radius: 2px;
+}
+
+/* --- 核心修复：指向你手动拷贝的 public 目录 --- */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  /* 直接指向 public/webfonts/ 下的文件 */
+  src: url("/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/webfonts/fa-regular-400.woff2") format("woff2");
+}
+
+/* 确保所有 fa 类名强制使用这个本地字体定义 */
+.fa-solid, .fas, .fa-regular, .far, .fa-brands, .fab, [class^="fa-"], [class*=" fa-"] {
+  font-family: 'Font Awesome 6 Free' !important;
+  font-weight: 900;
 }

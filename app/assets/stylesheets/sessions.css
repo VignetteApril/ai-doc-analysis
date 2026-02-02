@@ -1,0 +1,149 @@
+/* app/assets/stylesheets/sessions.css */
+
+/* 1. 核心容器 */
+.login-body {
+    background-image: url("login-bg-wall.png") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    /* 布局：卡片靠右 */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* 2. 左上角 Logo 区域 (已改为深色字) */
+.header-logo {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.logo-img {
+    height: 32px;
+    width: auto;
+    margin-right: 12px;
+}
+
+.header-logo span {
+    font-size: 20px;
+    font-weight: 600;
+    /* 改为深色：深蓝灰色 */
+    color: #334155;
+    letter-spacing: 1px;
+}
+
+/* 3. 主容器与卡片位置 */
+.main-container {
+    position: relative;
+    z-index: 5;
+    margin-right: 12%;
+}
+
+/* 4. 登录卡片：毛玻璃效果 */
+.login-card {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    padding: 45px 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+.login-title {
+    font-size: 22px;
+    color: #1e293b;
+    margin-bottom: 35px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* 5. 表单控件 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.input-wrapper:focus-within {
+    border-color: #2b6bf3;
+    box-shadow: 0 0 0 4px rgba(43, 107, 243, 0.1);
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 12px 12px 42px;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #334155;
+}
+
+/* 6. 辅助选项 */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #64748b;
+    margin: 20px 0;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember-me input {
+    margin-right: 6px;
+}
+
+.anonymous-link {
+    color: #2b6bf3;
+    text-decoration: none;
+}
+
+/* 7. 登录按钮 */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    background: #2b6bf3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-login:hover {
+    background: #1e58e6;
+}

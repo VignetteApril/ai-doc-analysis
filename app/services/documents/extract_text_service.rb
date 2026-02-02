@@ -1,5 +1,5 @@
 # app/services/documents/extract_text_service.rb
-require "shellwords"
+require "docx"
 
 module Documents
   class ExtractTextService
@@ -12,22 +12,36 @@ module Documents
     end
 
     def call
-      # ActiveStorage::Blob -> 临时文件路径（避免一次性读大文件进内存）
-      path = download_to_tempfile(@blob)
-      text = DocRipper::Doc.new(path).to_s rescue ""
-      text.to_s.encode("UTF-8", invalid: :replace, undef: :replace)
-    ensure
-      File.delete(path) if path && File.exist?(path)
+      return "" if @blob.blank?
+      return "" unless docx_blob?(@blob)
+
+      extract_from_docx(@blob)
+    rescue => e
+      Rails.logger.error("[ExtractTextService] #{e.class}: #{e.message}")
+      ""
     end
 
     private
 
-    def download_to_tempfile(blob)
-      tmp = Tempfile.new([ "upload", File.extname(blob.filename.to_s) ])
-      tmp.binmode
-      blob.download { |chunk| tmp.write(chunk) }
-      tmp.flush
-      tmp.path
+    def docx_blob?(blob)
+      filename_ext = File.extname(blob.filename.to_s).downcase
+      content_type = blob.content_type.to_s
+      valid_mime   = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+      filename_ext == ".docx" || content_type == valid_mime
+    end
+
+    def extract_from_docx(blob)
+      Tempfile.open([ "document", ".docx" ]) do |file|
+        file.binmode
+        file.write(blob.download)
+        file.rewind
+
+        doc = Docx::Document.open(file.path)
+        # 每个段落一行
+        text = doc.paragraphs.map(&:text).join("\n")
+        text.to_s.encode("UTF-8", invalid: :replace, undef: :replace, replace: "")
+      end
     end
   end
 end

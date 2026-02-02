@@ -1,13 +1,26 @@
-<!-- app/views/documents/new.html.erb -->
 <div class="max-w-4xl mx-auto p-6 space-y-4">
-  <h1 class="text-2xl font-semibold">新建公文</h1>
-  <%= form_with model: @document, class: "space-y-3" do |f| %>
-    <%= f.label :title, "标题", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.text_field :title, class: "w-full border rounded px-3 py-2" %>
+  <h1 class="text-2xl font-semibold">新建公文（上传 .docx）</h1>
 
-    <%= f.label :content, "正文", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.text_area :content, rows: 12, class: "w-full border rounded px-3 py-2" %>
+  <%= form_with model: @document,
+                url: documents_path,
+                local: true,
+                html: { multipart: true, class: "space-y-3" } do |f| %>
 
-    <%= f.submit "保存并进入校对", class: "px-4 py-2 bg-indigo-600 text-white rounded" %>
+    <div>
+      <%= f.label :title, "标题", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :title, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div>
+      <%= f.label :file, "Word 文件（仅支持 .docx）", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.file_field :file,
+            accept: ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            class: "w-full border rounded px-3 py-2 bg-white" %>
+      <p class="mt-1 text-xs text-gray-500">
+        请选择本地的 .docx 文件，系统会自动解析正文内容。
+      </p>
+    </div>
+
+    <%= f.submit "上传并解析", class: "px-4 py-2 bg-indigo-600 text-white rounded" %>
   <% end %>
 </div>

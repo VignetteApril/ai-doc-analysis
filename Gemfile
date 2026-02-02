@@ -41,6 +41,8 @@ gem "thruster", require: false
 
 gem "bcrypt", "~> 3.1"
 
+gem 'font-awesome-sass', '~> 6.4.0'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -60,6 +62,7 @@ group :development, :test do
   gem "doc_ripper", "~> 0.0.9"
   # 抽取 pdf（纯 Ruby 方案；若你装了 pdftotext 也可用系统工具）
   gem "pdf-reader", "~> 2.12"
+  gem "docx"
 end
 
 group :development do

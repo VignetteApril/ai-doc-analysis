@@ -1,53 +1,270 @@
-<div class="min-h-screen bg-gradient-to-br from-sky-50 via-white to-indigo-50 flex items-center justify-center px-4">
-  <div class="w-full max-w-md">
-    <div class="bg-white/80 backdrop-blur shadow-xl rounded-2xl p-8 border border-gray-100">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-10 w-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white font-bold">L</div>
-        <div>
-          <h1 class="text-xl font-semibold text-gray-900">系统登录</h1>
-          <p class="text-sm text-gray-500">请输入邮箱与密码进入系统</p>
-        </div>
-      </div>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI公文校对系统 - 用户登录</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 全局重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+        }
 
-      <% if flash[:alert] %>
-        <div class="mb-4 text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg p-3"><%= flash[:alert] %></div>
-      <% end %>
-      <% if flash[:notice] %>
-        <div class="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg p-3"><%= flash[:notice] %></div>
-      <% end %>
+        body {
+            /* 整体背景：模拟图中的浅蓝紫色氛围 */
+            background: linear-gradient(135deg, #eef1f5 0%, #e6efff 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-      <%= form_with url: login_path, method: :post, class: "space-y-5" do %>
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">邮箱</label>
-          <%= email_field_tag :email, params[:email],
-                required: true,
-                class: "w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 border" %>
-        </div>
+        /* 顶部 Logo 区域 */
+        .header-logo {
+            position: absolute;
+            top: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a505e;
+            z-index: 10;
+        }
 
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">密码</label>
-          <%= password_field_tag :password, nil,
-                required: true,
-                class: "w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 px-3 py-2 border" %>
-        </div>
+        .header-logo i {
+            background: #2b6bf3;
+            color: white;
+            padding: 6px;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
 
-        <div class="flex items-center justify-between">
-          <label class="inline-flex items-center gap-2 text-sm text-gray-600">
-            <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-            记住我
-          </label>
-          <a href="#" class="text-sm text-indigo-600 hover:text-indigo-700">忘记密码？</a>
-        </div>
+        /* 主容器 */
+        .container {
+            width: 1200px;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 50px;
+        }
 
-        <button type="submit"
-                class="w-full inline-flex justify-center items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2.5 rounded-xl transition">
-          登录
-        </button>
-      <% end %>
+        /* 左侧插图区域 */
+        .left-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 这里是你的3D插图占位符 */
+        /* 在实际项目中，你需要从PxCook导出那个云朵AI的切图，替换下面的src */
+        .illustration-img {
+            max-width: 100%;
+            height: auto;
+            /* 临时模拟图片的投影效果 */
+            filter: drop-shadow(0 20px 40px rgba(43, 107, 243, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* 简单的浮动动画效果 */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 右侧登录卡片 */
+        .login-card {
+            width: 420px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(27, 48, 90, 0.08); /* 柔和的大阴影 */
+            position: relative;
+            z-index: 5;
+        }
+
+        .login-title {
+            font-size: 22px;
+            color: #2b6bf3;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        /* 标题下方的蓝线 */
+        .login-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 40px;
+            height: 3px;
+            background: #2b6bf3;
+            border-radius: 2px;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .input-wrapper {
+            position: relative;
+            background: #f7f9fc; /* 浅灰背景 */
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .input-wrapper:focus-within {
+            background: #fff;
+            box-shadow: 0 0 0 2px #e0eaff; /* 聚焦时的光晕 */
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0a5b9;
+            font-size: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 14px 14px 45px; /* 留出图标位置 */
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            color: #333;
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: #c0c4cc;
+        }
+
+        /* 记住密码与匿名登录 */
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: #666;
+            cursor: pointer;
+        }
+
+        .remember-me input {
+            margin-right: 6px;
+            accent-color: #2b6bf3;
+        }
+
+        .anonymous-link {
+            color: #2b6bf3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .anonymous-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 登录按钮 */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #1e58e6 0%, #3b82f6 100%); /* 渐变蓝 */
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            box-shadow: 0 8px 20px rgba(43, 107, 243, 0.3); /* 按钮的发光感 */
+        }
+
+        .btn-login:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* 装饰背景元素（右下角的线条） */
+        .bg-decoration {
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(45deg);
+            pointer-events: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header-logo">
+        <i class="fa-solid fa-file-signature"></i> AI公文校对系统
     </div>
 
-    <p class="mt-6 text-center text-xs text-gray-500">
-      © <%= Time.current.year %> Your Company. All rights reserved.
-    </p>
-  </div>
-</div>
+    <div class="container">
+        <div class="left-side">
+            <img src="https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?t=st=1715670000~exp=1715673600~hmac=8c0a0a0a0a"
+                 alt="AI Illustration"
+                 class="illustration-img"
+                 style="opacity: 0.8; mix-blend-mode: multiply;">
+                 </div>
+
+        <div class="login-card">
+            <h2 class="login-title">用户登录</h2>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" class="form-control" placeholder="请输入用户名">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i> <input type="password" class="form-control" placeholder="请输入密码">
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> 记住密码
+                    </label>
+                    <a href="#" class="anonymous-link">匿名登录</a>
+                </div>
+
+                <button type="submit" class="btn-login">登录</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-decoration"></div>
+
+</body>
+</html>

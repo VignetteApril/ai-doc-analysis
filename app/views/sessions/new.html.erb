@@ -10,11 +10,34 @@
     <div class="login-card">
       <h2 class="login-title">用户登录</h2>
 
-      <%# Flash 错误提示 %>
-      <% if flash[:alert] %>
-        <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 text-sm flex items-center">
-          <i class="fa-solid fa-circle-exclamation mr-2"></i>
-          <%= flash[:alert] %>
+      <%# 通用提醒消息组件 %>
+      <% if flash.any? %>
+        <div class="flash-container">
+          <% flash.each do |type, message| %>
+            <% if message.present? %>
+              <% css_class = case type.to_sym
+                   when :notice, :success then "flash-success"
+                   when :alert, :error, :danger then "flash-error"
+                   when :warning then "flash-warning"
+                   when :info then "flash-info"
+                   else "flash-info"
+                   end %>
+              <% icon_class = case type.to_sym
+                   when :notice, :success then "fa-circle-check"
+                   when :alert, :error, :danger then "fa-circle-exclamation"
+                   when :warning then "fa-triangle-exclamation"
+                   when :info then "fa-circle-info"
+                   else "fa-circle-info"
+                   end %>
+              <div class="flash-message <%= css_class %>">
+                <i class="fa-solid <%= icon_class %>"></i>
+                <span><%= message %></span>
+                <button class="flash-close" type="button" aria-label="关闭提醒">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
 

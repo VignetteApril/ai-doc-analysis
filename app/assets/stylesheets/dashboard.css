@@ -1,0 +1,261 @@
+/* app/assets/stylesheets/dashboard.css */
+
+/* 1. 核心容器 */
+.dashboard-container {
+    min-height: 100vh;
+    background-color: #f9fafb;
+}
+
+/* 2. 顶部导航栏 */
+.dashboard-header {
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard-header .header-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+}
+
+/* 左侧：系统名称 */
+.system-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* 中间：Tab导航 */
+.tab-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.tab-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.tab-button.active {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.tab-button.inactive {
+    background-color: #ffffff;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+}
+
+.tab-button:hover {
+    opacity: 0.8;
+}
+
+/* 右侧：用户菜单 */
+.user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.user-menu .user-menu-container {
+    position: relative;
+}
+
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.user-menu-button:hover {
+    background-color: #f3f4f6;
+}
+
+.user-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    border: 2px solid #d1d5db;
+}
+
+.user-menu-button i {
+    color: #6b7280;
+}
+
+/* 用户菜单下拉框 */
+.user-menu-dropdown {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 0.5rem;
+    width: 12rem;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 0.25rem;
+    z-index: 50;
+}
+
+.user-menu-dropdown.hidden {
+    display: none;
+}
+
+.user-menu-item {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    color: #374151;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    border-radius: 0.375rem;
+}
+
+.user-menu-item:hover {
+    background-color: #f3f4f6;
+}
+
+.user-menu-item.logout {
+    color: #dc2626;
+}
+
+.user-menu-divider {
+    border-top: 1px solid #e5e7eb;
+    margin: 0.25rem 0;
+}
+
+/* 3. 主内容区域 */
+.dashboard-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 2rem 2rem;
+}
+
+/* Tab内容区域 */
+.tab-content {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.tab-content.hidden {
+    display: none;
+}
+
+.tab-content h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 1rem;
+}
+
+.tab-content p {
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+/* 按钮样式 */
+.btn-primary {
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    padding: 0.5rem 1rem;
+    background-color: #e5e7eb;
+    color: #374151;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.btn-secondary:hover {
+    background-color: #d1d5db;
+}
+
+.btn-success {
+    padding: 0.5rem 1rem;
+    background-color: #10b981;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+}
+
+.btn-warning {
+    padding: 0.5rem 1rem;
+    background-color: #f59e0b;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.btn-warning:hover {
+    background-color: #d97706;
+}
+
+/* 按钮组 */
+.btn-group {
+    display: flex;
+    gap: 1rem;
+}

@@ -1,5 +1,88 @@
-<div class="max-w-xl mx-auto mt-10">
-  <h1 class="text-2xl font-semibold">Dashboard</h1>
-  <p class="mt-4">你好，<%= current_user&.email %></p>
-  <%= button_to "退出登录", logout_path, method: :delete, class: "mt-6 px-4 py-2 bg-gray-800 text-white rounded" %>
+<div class="dashboard-container" data-controller="dashboard">
+  <!-- 顶部导航栏 -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <!-- 左侧：系统名称 -->
+      <div class="system-title">
+        AI公文校对系统
+      </div>
+      
+      <!-- 中间：Tab导航 -->
+      <div class="tab-nav">
+        <button id="proofread-tab" class="tab-button active" data-tab="proofread">
+          <i class="fas fa-file-alt"></i>
+          <span>公文校审</span>
+        </button>
+        <button id="lexicon-tab" class="tab-button inactive" data-tab="lexicon">
+          <i class="fas fa-book"></i>
+          <span>词库管理</span>
+        </button>
+      </div>
+      
+      <!-- 右侧：用户菜单 -->
+      <div class="user-menu">
+        <div class="user-menu-container">
+          <button id="user-menu-button" class="user-menu-button">
+            <img src="https://via.placeholder.com/40" alt="用户头像" class="user-avatar">
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          
+          <!-- 用户菜单下拉框 -->
+          <div id="user-menu" class="user-menu-dropdown hidden">
+            <a href="#" class="user-menu-item">
+              <i class="fas fa-key"></i>
+              <span>修改密码</span>
+            </a>
+            <div class="user-menu-divider"></div>
+            <%= button_to logout_path, method: :delete, class: "user-menu-item logout" do %>
+              <i class="fas fa-sign-out-alt"></i>
+              <span>退出登录</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区域 -->
+  <main class="dashboard-content">
+    <!-- 公文校审Tab内容 -->
+    <div id="proofread-content" class="tab-content">
+      <h2>公文校审</h2>
+      <p>公文校审功能正在开发中...</p>
+      <div class="btn-group">
+        <button class="btn-primary">
+          <i class="fas fa-upload"></i>
+          <span>上传文档</span>
+        </button>
+        <button class="btn-secondary">
+          <i class="fas fa-file"></i>
+          <span>新建文档</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 词库管理Tab内容 -->
+    <div id="lexicon-content" class="tab-content hidden">
+      <h2>词库管理</h2>
+      <p>词库管理功能正在开发中...</p>
+      <div class="btn-group">
+        <button class="btn-success">
+          <i class="fas fa-plus"></i>
+          <span>添加词汇</span>
+        </button>
+        <button class="btn-warning">
+          <i class="fas fa-edit"></i>
+          <span>编辑词库</span>
+        </button>
+        <button class="btn-primary">
+          <i class="fas fa-download"></i>
+          <span>导出词库</span>
+        </button>
+      </div>
+    </div>
+  </main>
 </div>
+
+<!-- Turbo Frame -->
+<%= turbo_frame_tag "dashboard-content" %>
